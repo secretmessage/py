@@ -9,7 +9,6 @@ message_routes = Blueprint('message_route', __name__)
 
 @message_routes.route('/api/v0/messages/', methods=['GET'])
 def get_all_messages():
-    print('we are in messages now ')
     messages = Message.query.all()
     my_string = "A list of all messages: "
     for message in messages:
@@ -22,7 +21,7 @@ def get_all_messages():
 def get_message(message_id):
     message = Message.query.get(message_id)
     if message is None:
-        say404()
+        return make_response(jsonify({'error': 'Not found'}))
     else:
         return message.message, 200
     return jsonify({'Status': "Error", "Message": "Confused. You should never see this message."})
@@ -46,8 +45,3 @@ def post_signup():
             shared.db.session.commit()
             return jsonify({'Status': "Sucessful"})
     return jsonify({'Status': "Error", "Message": "Confused. You should never see this message."})
-
-
-def say404():
-    return_json = jsonify({'error': 'Not found'})
-    return make_response(return_json, 404)

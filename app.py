@@ -7,8 +7,8 @@ from flask_cors import CORS
 
 import secret
 import shared
-from routes.other import other_route
 from routes.message import message_routes
+from routes.other import other_route
 
 application = Flask(__name__)
 BASE_URL = os.path.abspath(os.path.dirname(__file__))
