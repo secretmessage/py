@@ -1,0 +1,10 @@
+// my virtualenv use `virtualenv venv/` 
+venv/
+
+// python cache files 
+*.pyc
+
+.DS_Store
+
+.idea/
+
