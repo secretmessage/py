@@ -26,11 +26,8 @@ def get_message(message_id):
         return message.message, 200
 
 
-@message_routes.route('/api/v0/message/', methods=['POST'])
-def post_signup():
-    message_id = request.json['message_id']
-    author_id = request.json['author_id']
-    message = request.json['message']
+@message_routes.route('/api/v0/message/<message_id>/<author_id>/<message>', methods=['GET'])
+def post_signup(message_id,author_id,message):
     existing_author = Author.query.get(author_id)
     if existing_author is None:
         return jsonify({'Status': "Failed", "Message": "Author with ID does not exist."})
