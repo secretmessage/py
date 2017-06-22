@@ -17,7 +17,7 @@ dist = os.path.join(BASE_URL, "dist")
 CORS(application)
 
 application.config[
-    'SQLALCHEMY_DATABASE_URI'] = secret.SQLALCHEMY_DATABASE_URI
+    'SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
 shared.db.init_app(application)
 application.register_blueprint(other_route)
 application.register_blueprint(message_routes)
