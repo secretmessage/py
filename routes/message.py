@@ -24,7 +24,6 @@ def get_message(message_id):
         return make_response(jsonify({'error': 'Not found'}))
     else:
         return message.message, 200
-    return jsonify({'Status': "Error", "Message": "Confused. You should never see this message."})
 
 
 @message_routes.route('/api/v0/message/', methods=['POST'])
@@ -44,4 +43,3 @@ def post_signup():
             shared.db.session.add(new_message)
             shared.db.session.commit()
             return jsonify({'Status': "Sucessful"})
-    return jsonify({'Status': "Error", "Message": "Confused. You should never see this message."})
