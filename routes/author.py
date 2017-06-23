@@ -30,4 +30,4 @@ def post_signup():
         new_author = Author(author_id=author_id, full_name=full_name, email=email)
         shared.db.session.add(new_author)
         shared.db.session.commit()
-        return jsonify(new_author)
+        return jsonify(new_author.serialize)
