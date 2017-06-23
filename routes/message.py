@@ -19,7 +19,7 @@ def get_message(message_id):
     if message is None:
         return make_response(jsonify({'error': 'Not found'}))
     else:
-        return make_response(jsonify(message))
+        return make_response(jsonify(message.serialize))
 
 
 @message_routes.route('/api/v0/message/<message_id>/<author_id>/<message>', methods=['POST'])
