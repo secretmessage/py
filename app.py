@@ -33,7 +33,7 @@ def internal_server_error(error):
 @application.route('/', defaults={'path': ''})  # Catch All urls, enabling copy-paste url
 @application.route('/<path:path>')  # Catch All urls, enabling copy-paste url
 def home(path):
-    return 'Easy there cowboy.'
+    return jsonify({'Status': "Failed", "Message": "Hold on. I have not implemented this yet."})
 
 
 @application.errorhandler(404)
