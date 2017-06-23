@@ -8,12 +8,6 @@ from models.message import Message
 message_routes = Blueprint('message_route', __name__)
 
 
-@message_routes.route('/api/v0/message/', methods=['GET'])
-@cross_origin()
-def get_message(message_id):
-    return make_response({'Status': "Failed", "Message": "Getting all messages is not available"})
-
-
 @message_routes.route('/api/v0/message/', methods=['POST'])
 @cross_origin()
 def post_signup():

@@ -9,12 +9,6 @@ from models.author import Author
 author_routes = Blueprint('author_route', __name__)
 
 
-@author_routes.route('/api/v0/author/', methods=['GET'])
-@cross_origin()
-def get_message(message_id):
-    return make_response({'Status': "Failed", "Message": "Getting all authors is not available"})
-
-
 @author_routes.route('/api/v0/author/', methods=['POST'])
 @cross_origin()
 def post_signup():
