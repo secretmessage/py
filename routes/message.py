@@ -7,12 +7,7 @@ from models.message import Message
 message_routes = Blueprint('message_route', __name__)
 
 
-@message_routes.route('/api/v0/messages/', methods=['GET'])
-def get_all_messages():
-    return make_response([i.serialize for i in Message.query.all()])
-
-
-@message_routes.route('/api/v0/messages/<message_id>', methods=['GET'])
+@message_routes.route('/api/v0/message/<message_id>', methods=['GET'])
 def get_message(message_id):
     message = Message.query.get(message_id)
     if message is None:
@@ -34,4 +29,4 @@ def post_signup(message_id, author_id, message):
             new_message = Message(message_id=message_id, author_id=author_id, message=message)
             shared.db.session.add(new_message)
             shared.db.session.commit()
-            return jsonify({'Status': "Sucessful"})
+            return jsonify(new_message)

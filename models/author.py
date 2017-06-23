@@ -3,11 +3,11 @@ from shared import db
 
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.Text)
-    email = db.Column(db.Text)
+    full_name = db.Column(db.Text, nullable=False)
+    email = db.Column(db.Text, nullable=False, unique=True)
 
-    def __init__(self, input_id, full_name, email):
-        self.id = input_id
+    def __init__(self, author_id, full_name, email):
+        self.id = author_id
         self.full_name = full_name
         self.email = email
 
@@ -18,7 +18,3 @@ class Author(db.Model):
             'full_name': self.full_name,
             'email': self.email
         }
-
-    @property
-    def serialize_many2many(self):
-        return [item.serialize for item in self.many2many]
