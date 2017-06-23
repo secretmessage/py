@@ -32,4 +32,4 @@ def post_signup():
             new_message = Message(message_id=message_id, author_id=author_id, message=message)
             shared.db.session.add(new_message)
             shared.db.session.commit()
-            return jsonify(new_message)
+            return jsonify(new_message.serialize)
