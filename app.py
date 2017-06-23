@@ -3,7 +3,7 @@
 import os
 
 from flask import Flask, jsonify, make_response
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 import shared
 from routes.author import author_routes
@@ -25,6 +25,7 @@ application.register_blueprint(message_routes)
 
 
 @application.errorhandler(500)
+@cross_origin()
 def internal_server_error(error):
     return_json = jsonify({'error': error})
     return make_response(return_json, 500)
@@ -32,8 +33,9 @@ def internal_server_error(error):
 
 @application.route('/', defaults={'path': ''})  # Catch All urls, enabling copy-paste url
 @application.route('/<path:path>')  # Catch All urls, enabling copy-paste url
+@cross_origin()
 def home(path):
-    return 'Easy there cowboy.'
+    return jsonify({'Status': "Failed", "Message": "Hold on. I have not implemented this yet."})
 
 
 @application.errorhandler(404)
