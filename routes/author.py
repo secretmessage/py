@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, make_response, request
+from flask_cors import CORS, cross_origin
 
 import shared, re
 from models.author import Author
@@ -16,6 +17,7 @@ def get_author(author_id):
 
 
 @author_routes.route('/api/v0/author/', methods=['POST'])
+@cross_origin()
 def post_signup():
     author_id = request.json['author_id']
     full_name = request.json['full_name']
