@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, make_response
+from flask import Blueprint, jsonify, make_response, request
 
 import shared
 from models.author import Author
@@ -16,8 +16,11 @@ def get_message(message_id):
         return make_response(jsonify(message.serialize))
 
 
-@message_routes.route('/api/v0/message/<message_id>/<author_id>/<message>', methods=['POST'])
-def post_signup(message_id, author_id, message):
+@message_routes.route('/api/v0/message/', methods=['POST'])
+def post_signup():
+    message_id = request.json['message_id']
+    author_id = request.json['author_id']
+    message = request.json['message']
     existing_author = Author.query.get(author_id)
     if existing_author is None:
         return jsonify({'Status': "Failed", "Message": "Author with ID does not exist."})

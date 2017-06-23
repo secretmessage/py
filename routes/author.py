@@ -27,7 +27,7 @@ def post_signup():
     elif existing_author_email is not None:
         return jsonify({'Status': "Failed", "Message": "Author email exists."})
     else:
-        new_author = Author(id=author_id, full_name=full_name, email=email)
+        new_author = Author(author_id=author_id, full_name=full_name, email=email)
         shared.db.session.add(new_author)
         shared.db.session.commit()
         return jsonify(new_author)
