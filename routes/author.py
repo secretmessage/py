@@ -1,19 +1,26 @@
 from flask import Blueprint, jsonify, make_response, request
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
 
-import shared, re
+import re
+import shared
 from models.author import Author
 
 author_routes = Blueprint('author_route', __name__)
 
 
 @author_routes.route('/api/v0/author/<author_id>', methods=['GET'])
+@cross_origin()
 def get_author(author_id):
     author = Author.query.get(author_id)
     if author is None:
         return make_response(jsonify({'error': 'Not found'}))
     else:
         return make_response(jsonify(author.serialize))
+
+@author_routes.route('/api/v0/author/', methods=['GET'])
+@cross_origin()
+def get_message(message_id):
+    return make_response({'Status': "Failed", "Message": "Getting all authors is not available"})
 
 
 @author_routes.route('/api/v0/author/', methods=['POST'])
