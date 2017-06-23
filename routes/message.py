@@ -9,8 +9,7 @@ message_routes = Blueprint('message_route', __name__)
 
 @message_routes.route('/api/v0/messages/', methods=['GET'])
 def get_all_messages():
-    messages = Message.query.all()
-    return make_response(jsonify(messages))
+    return make_response([i.serialize for i in Message.query.all()])
 
 
 @message_routes.route('/api/v0/messages/<message_id>', methods=['GET'])
