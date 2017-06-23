@@ -23,6 +23,7 @@ application.register_blueprint(other_route)
 application.register_blueprint(author_routes)
 application.register_blueprint(message_routes)
 
+
 @application.errorhandler(500)
 def internal_server_error(error):
     return_json = jsonify({'error': error})
