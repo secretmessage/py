@@ -9,8 +9,7 @@ message_routes = Blueprint('message_route', __name__)
 
 @message_routes.route('/api/v0/messages/', methods=['GET'])
 def get_all_messages():
-    messages = Message.query.all()
-    return make_response(jsonify(messages))
+    return make_response([i.serialize for i in Message.query.all()])
 
 
 @message_routes.route('/api/v0/messages/<message_id>', methods=['GET'])
@@ -19,7 +18,7 @@ def get_message(message_id):
     if message is None:
         return make_response(jsonify({'error': 'Not found'}))
     else:
-        return make_response(jsonify(message))
+        return make_response(jsonify(message.serialize))
 
 
 @message_routes.route('/api/v0/message/<message_id>/<author_id>/<message>', methods=['POST'])

@@ -10,3 +10,15 @@ class Author(db.Model):
         self.id = input_id
         self.full_name = full_name
         self.email = email
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'full_name': self.full_name,
+            'email': self.email
+        }
+
+    @property
+    def serialize_many2many(self):
+        return [item.serialize for item in self.many2many]
