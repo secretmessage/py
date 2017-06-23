@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, make_response, request
+from flask_cors import CORS, cross_origin
 
 import shared
 from models.author import Author
@@ -16,7 +17,13 @@ def get_message(message_id):
         return make_response(jsonify(message.serialize))
 
 
+@message_routes.route('/api/v0/message/', methods=['GET'])
+def get_message(message_id):
+    return make_response()
+
+
 @message_routes.route('/api/v0/message/', methods=['POST'])
+@cross_origin()
 def post_signup():
     message_id = request.json['message_id']
     author_id = request.json['author_id']
